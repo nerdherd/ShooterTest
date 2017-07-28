@@ -12,16 +12,19 @@ public class RobotMap {
 	public static int eject_port = 0;
 	
 	//Tuned Constants
-	public static double shooter_kP = .1100;
+	public static double shooter_kP = 0.1100;
+	public static double shooter_kI = 0.0;	
 	public static double shooter_kD = 0.0;	
 	public static double shooter_kF = 0.025;
 	
-	//Desired Values
-	public static double desired_shooter_RPM = 3425;
-	public static double percent_tolerance = 0.001;
-	public static double eject_speed = -0.5;
+	public static double eject_kP = 0.0;
+	public static double eject_kI = 0.0;	
+	public static double eject_kD = 0.0;
+	public static double eject_kF = 0.0;
 	
-	//TESTING VALS
-	public static double testing_incr = 0.0001;
-	public static double desiredTestRPM = 1500; //BANG BANG
+	//Desired Values
+	public static double desired_RPM = 3425;
+	
+	//BANG BANG TESTING VALS
+//	public static double desiredTestRPM = 1500;
 }

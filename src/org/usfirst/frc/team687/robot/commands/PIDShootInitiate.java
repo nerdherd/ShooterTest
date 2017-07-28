@@ -1,16 +1,15 @@
 package org.usfirst.frc.team687.robot.commands;
 
 import org.usfirst.frc.team687.robot.Robot;
-import org.usfirst.frc.team687.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class PIDShootInitialize extends Command {
+public class PIDShootInitiate extends Command {
 
-    public PIDShootInitialize() {
+    public PIDShootInitiate() {
         requires(Robot.shooter);
     }
     
@@ -26,7 +25,6 @@ public class PIDShootInitialize extends Command {
 
     @Override
 	protected boolean isFinished() {
-    	return false;
-//		return Robot.shooter.getAtTarget();
+    	return !Robot.oi.articulationButtonState(1);
 	}
 }
