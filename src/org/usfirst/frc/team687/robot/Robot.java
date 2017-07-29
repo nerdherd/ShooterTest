@@ -37,12 +37,6 @@ public class Robot extends IterativeRobot {
 //		chooser.addDefault("Default Auto", new ExampleCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
-		SmartDashboard.putNumber("Shooter kP: ", RobotMap.shooter_kP);
-		SmartDashboard.putNumber("Shooter kD: ", RobotMap.shooter_kD);
-		SmartDashboard.putNumber("Shooter kF: ", RobotMap.shooter_kF);
-		SmartDashboard.putNumber("Ejector kP: ", RobotMap.eject_kP);
-		SmartDashboard.putNumber("Ejector kD: ", RobotMap.eject_kD);
-		SmartDashboard.putNumber("Ejector kF: ", RobotMap.eject_kF);
 		}
 
 	/**

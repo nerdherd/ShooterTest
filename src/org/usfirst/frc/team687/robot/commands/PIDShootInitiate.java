@@ -22,9 +22,13 @@ public class PIDShootInitiate extends Command {
     protected void execute() {
     	Robot.shooter.initShooter();
     }
+    
+    protected void end() {
+    	Robot.shooter.stopShooter();
+    }
 
     @Override
 	protected boolean isFinished() {
-    	return !Robot.oi.articulationButtonState(1);
+    	return false;
 	}
 }

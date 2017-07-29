@@ -21,10 +21,16 @@ public class PIDEjectorInitiate extends Command {
     @Override
     protected void execute() {
     	Robot.shooter.initEjector();
+    	Robot.shooter.initShooter();
+    }
+    
+    protected void end() {
+    	Robot.shooter.stopEjector();
+    	Robot.shooter.stopShooter();
     }
     
 	@Override
 	protected boolean isFinished() {
-		return !Robot.oi.articulationButtonState(5);
+		return false;
 	}
 }

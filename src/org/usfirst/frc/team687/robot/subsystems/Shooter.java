@@ -2,6 +2,7 @@ package org.usfirst.frc.team687.robot.subsystems;
 
 import com.ctre.CANTalon;
 import com.ctre.CANTalon.FeedbackDevice;
+import com.ctre.CANTalon.TalonControlMode;
 
 import org.usfirst.frc.team687.robot.RobotMap;
 
@@ -27,10 +28,13 @@ public class Shooter extends Subsystem {
 		SmartDashboard.putNumber("eject_kD: ", RobotMap.eject_kF);
 		SmartDashboard.putNumber("shooter_kP: ", RobotMap.shooter_kP);
 		SmartDashboard.putNumber("shooter_kF: ", RobotMap.shooter_kF);
-		SmartDashboard.putNumber("RPM Desired value: ", RobotMap.desired_RPM);
-
-    	flywheel.changeControlMode(CANTalon.TalonControlMode.Speed);
-    	
+		SmartDashboard.putNumber("Shooter RPM Desired value: ", RobotMap.desired_shooter_RPM);
+		SmartDashboard.putNumber("Ejector RPM Desired value: ", RobotMap.desired_ejector_RPM);
+		SmartDashboard.putNumber("Shooter Current RPM", 0);
+		SmartDashboard.putNumber("Ejector Current RPM", 0);
+		SmartDashboard.putNumber("Get Voltage: ", 0);
+		SmartDashboard.putNumber("Get Current: ", 0);
+		
 		flywheel.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
 		
 		flywheel.setF(RobotMap.shooter_kF);
@@ -40,6 +44,8 @@ public class Shooter extends Subsystem {
     	
     	flywheel.reverseOutput(true);
     	flywheel.configPeakOutputVoltage(0, -12);
+    	
+		ejector.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Absolute);
     	
     	ejector.setF(RobotMap.eject_kF);
     	ejector.setP(RobotMap.eject_kP);
@@ -58,12 +64,32 @@ public class Shooter extends Subsystem {
     
     public void initShooter(){
     	flywheel.changeControlMode(CANTalon.TalonControlMode.Speed);
-    	flywheel.set(RobotMap.desired_RPM);
+    	flywheel.set(RobotMap.desired_shooter_RPM);
     }
     
     public void initEjector(){
     	ejector.changeControlMode(CANTalon.TalonControlMode.Speed);
-    	ejector.set(RobotMap.desired_RPM);
+    	ejector.set(RobotMap.desired_ejector_RPM);
+    }
+    
+    public void setShooterSpeed(double x) {
+    	flywheel.changeControlMode(TalonControlMode.Speed);
+    	flywheel.set(x);
+    }
+    
+    public void setEjectorSpeed(double x) {
+    	flywheel.changeControlMode(TalonControlMode.Speed);
+    	ejector.set(x);
+    }
+    
+    public void stopShooter() {
+    	flywheel.changeControlMode(TalonControlMode.PercentVbus);
+    	flywheel.set(0);
+    }
+    
+    public void stopEjector() {
+    	ejector.changeControlMode(TalonControlMode.PercentVbus);
+    	ejector.set(0);
     }
     
 //    public void BangBangCheck() {
@@ -82,14 +108,17 @@ public class Shooter extends Subsystem {
 //    }
     
     public void shooterUpdate() {
-		SmartDashboard.putNumber("Current RPM", flywheel.getSpeed());
+		SmartDashboard.putNumber("Shooter Current RPM", flywheel.getSpeed());
+		SmartDashboard.putNumber("Ejector Current RPM", ejector.getSpeed());
 		SmartDashboard.putNumber("Get Voltage: ", pdp.getVoltage());
-		SmartDashboard.putNumber("Get Current: ", pdp.getCurrent(1));
+		SmartDashboard.putNumber("Get Shooter Current: ", flywheel.getOutputCurrent());
+		SmartDashboard.putNumber("Get Ejector Current: ", ejector.getOutputCurrent());
 		RobotMap.eject_kP = SmartDashboard.getNumber("eject_kP: ", RobotMap.eject_kP);
-		RobotMap.eject_kF = SmartDashboard.getNumber("eject_kD: ", RobotMap.eject_kF);
+		RobotMap.eject_kF = SmartDashboard.getNumber("eject_kF: ", RobotMap.eject_kF);
 		RobotMap.shooter_kP = SmartDashboard.getNumber("shooter_kP: ", RobotMap.shooter_kP);
 		RobotMap.shooter_kF = SmartDashboard.getNumber("shooter_kF: ", RobotMap.shooter_kF);
-		RobotMap.desired_RPM = SmartDashboard.getNumber("RPM Desired value: ", RobotMap.desired_RPM);
+		RobotMap.desired_shooter_RPM = SmartDashboard.getNumber("Shooter RPM Desired value: ", RobotMap.desired_shooter_RPM);
+		RobotMap.desired_ejector_RPM = SmartDashboard.getNumber("Ejector RPM Desired value: ", RobotMap.desired_ejector_RPM);
     }
     
 }

@@ -25,8 +25,8 @@ public class OI {
 		shoot = new JoystickButton(articulation_joystick, 1);
 		
 		//Commands
-		initiate_shooter.whenPressed(new PIDShootInitiate());
-		shoot.whenPressed(new PIDEjectorInitiate());
+//		initiate_shooter.whileHeld(new PIDShootInitiate());
+		shoot.whileHeld(new PIDEjectorInitiate());
 	}
 	
 	public boolean articulationButtonState(int button_number){

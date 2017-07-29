@@ -9,7 +9,7 @@ package org.usfirst.frc.team687.robot;
 public class RobotMap {
 	//Actuator Ports
 	public static int flywheel_port = 1;
-	public static int eject_port = 0;
+	public static int eject_port = 2;
 	
 	//Tuned Constants
 	public static double shooter_kP = 0.1100;
@@ -17,14 +17,14 @@ public class RobotMap {
 	public static double shooter_kD = 0.0;	
 	public static double shooter_kF = 0.025;
 	
-	public static double eject_kP = 0.0;
+	public static double eject_kP = 0.00625;
 	public static double eject_kI = 0.0;	
 	public static double eject_kD = 0.0;
-	public static double eject_kF = 0.0;
+	public static double eject_kF = 0.02875;
 	
 	//Desired Values
-	public static double desired_RPM = 3425;
-	
+	public static double desired_shooter_RPM = 3432;
+	public static double desired_ejector_RPM = 2000;
 	//BANG BANG TESTING VALS
 //	public static double desiredTestRPM = 1500;
 }
